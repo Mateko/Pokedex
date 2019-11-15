@@ -20,6 +20,9 @@ class PickingPokemon extends React.Component {
   }
 
   render() {
+    const disableButton = this.state.pokemon.length === 0;
+    const whiteSpaces = this.state.pokemon.split(" ").length > 1;
+
     if (this.state.toPokeDetails === true) {
       return <Redirect to="/pokemon_details" />;
     }
@@ -51,10 +54,8 @@ class PickingPokemon extends React.Component {
               }}
               onChange={this.onInputChange.bind(this)}
               value={this.state.pokemon}
-              action="javascript:void(-1)"
             />
-
-            <div
+            <button
               className="ui fluid large submit button blue pokemon-button-submit"
               style={{
                 backgroundColor: "#FFCB05",
@@ -63,9 +64,15 @@ class PickingPokemon extends React.Component {
                 fontSize: "20px"
               }}
               onClick={this.onInputSubmit.bind(this)}
+              disabled={disableButton | whiteSpaces}
             >
               Search
-            </div>
+            </button>
+            {whiteSpaces ? (
+              <div class="ui red message">
+                Pokemon name can't have white spaces!
+              </div>
+            ) : null}
           </div>
         </form>
       </div>
