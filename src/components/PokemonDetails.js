@@ -1,13 +1,14 @@
 import React from "react";
 import PokemonSkills from "./PokemonSkills";
+import Loader from "./Loader";
 import PokemonAbilities from "./PokemonAbilities";
+import { Link } from "react-router-dom";
 import "./PokemonDetails.css";
 
-const PokemonDetails = ({ selectedPokemon }) => {
+const PokemonDetails = ({ selectedPokemon, fetchingError }) => {
   if (selectedPokemon !== null) {
     const stats = selectedPokemon.stats;
     const abilities = selectedPokemon.abilities;
-
     const pokemonTypeColors = {
       grass: "#78C850",
       fire: "#F08030",
@@ -72,17 +73,27 @@ const PokemonDetails = ({ selectedPokemon }) => {
         <PokemonSkills stats={stats} />
       </div>
     );
-  } else {
+  } else if (fetchingError) {
     return (
-      <div className="ui grid aligned center" className="pokemon-detail-loader">
-        <div class="ui active inverted dimmer">
-          <div class="ui large text loader">Loading</div>
-        </div>
-        <p></p>
-        <p></p>
-        <p></p>
+      <div className="fetching-error">
+        <div className="ui red message">Something went wrong :(</div>
+        <Link
+          className="ui fluid large submit button blue"
+          role="button"
+          to="/"
+          style={{
+            backgroundColor: "#FFCB05",
+            marginTop: "5px",
+            color: "#2A75BB",
+            fontSize: "20px"
+          }}
+        >
+          Back to searching
+        </Link>
       </div>
     );
+  } else {
+    return <Loader />;
   }
 };
 

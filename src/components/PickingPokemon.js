@@ -69,7 +69,7 @@ class PickingPokemon extends React.Component {
               Search
             </button>
             {whiteSpaces ? (
-              <div class="ui red message">
+              <div className="ui red message">
                 Pokemon name can't have white spaces!
               </div>
             ) : null}

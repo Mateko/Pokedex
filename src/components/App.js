@@ -2,19 +2,27 @@ import React from "react";
 import PickingPokemon from "./PickingPokemon";
 import PokemonDetails from "./PokemonDetails";
 import { BrowserRouter, Route } from "react-router-dom";
+import { createCipher } from "crypto";
 const Pokedex = require("pokeapi-js-wrapper");
 const P = new Pokedex.Pokedex();
 
 class App extends React.Component {
-  state = { selectedPokemon: null };
+  state = { selectedPokemon: null, fetchingError: false };
 
   onGettingPokemonName = async selectedPokemon => {
     const loweredSelectedPokemon = selectedPokemon.toLowerCase();
-    const pokemon = await P.getPokemonByName(loweredSelectedPokemon);
-    this.setState({
-      selectedPokemon: pokemon
-    });
+    try {
+      const pokemon = await P.getPokemonByName(loweredSelectedPokemon);
+      this.setState({
+        selectedPokemon: pokemon
+      });
+    } catch (error) {
+      this.setState({
+        fetchingError: true
+      });
+    }
   };
+
   render() {
     return (
       <div>
@@ -33,7 +41,10 @@ class App extends React.Component {
               path="/pokemon_details"
               exact
               component={() => (
-                <PokemonDetails selectedPokemon={this.state.selectedPokemon} />
+                <PokemonDetails
+                  selectedPokemon={this.state.selectedPokemon}
+                  fetchingError={this.state.fetchingError}
+                />
               )}
             />
           </div>
