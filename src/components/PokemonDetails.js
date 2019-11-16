@@ -2,30 +2,14 @@ import React from "react";
 import PokemonSkills from "./PokemonSkills";
 import Loader from "./Loader";
 import PokemonAbilities from "./PokemonAbilities";
-import { Link } from "react-router-dom";
+import LinkToMainPage from "./LinkToMainPage";
+import pokemonTypeColors from "./PokemonTypeColors";
 import "./PokemonDetails.css";
 
 const PokemonDetails = ({ selectedPokemon, fetchingError }) => {
   if (selectedPokemon !== null) {
     const stats = selectedPokemon.stats;
     const abilities = selectedPokemon.abilities;
-    const pokemonTypeColors = {
-      grass: "#78C850",
-      fire: "#F08030",
-      water: "#6890F0",
-      bug: "#A8B820",
-      normal: "#A8A878",
-      poison: " #47D147",
-      electric: "#FFFF66",
-      ground: " #CCCCB3",
-      fairy: "#EE99AC",
-      fighting: "#C03028",
-      psychic: "#F85888",
-      rock: "#B8A038",
-      ghost: "#705898",
-      ice: "#4D79FF",
-      dragon: "#7038F8"
-    };
 
     function pokemonType() {
       return selectedPokemon.types.map(({ type }) => {
@@ -46,7 +30,7 @@ const PokemonDetails = ({ selectedPokemon, fetchingError }) => {
           <img
             src={selectedPokemon.sprites.front_default}
             alt="pokemon image"
-            className="pokemon-image "
+            className="pokemon-image"
           />
         </div>
         <div className="nine wide column">
@@ -71,25 +55,16 @@ const PokemonDetails = ({ selectedPokemon, fetchingError }) => {
           Stats
         </h4>
         <PokemonSkills stats={stats} />
+        <div className="sixteen wide column">
+          <LinkToMainPage message={"Back to main page"} />
+        </div>
       </div>
     );
   } else if (fetchingError) {
     return (
       <div className="fetching-error">
-        <div className="ui red message">Something went wrong :(</div>
-        <Link
-          className="ui fluid large submit button blue"
-          role="button"
-          to="/"
-          style={{
-            backgroundColor: "#FFCB05",
-            marginTop: "5px",
-            color: "#2A75BB",
-            fontSize: "20px"
-          }}
-        >
-          Back to searching
-        </Link>
+        <div className="ui error-message message">Something went wrong :(</div>
+        <LinkToMainPage message={"Go back to searching"} />
       </div>
     );
   } else {

@@ -1,19 +1,9 @@
 import React from "react";
-
 const PokemonSkills = ({ stats }) => {
   return stats.map(stat => {
     return (
-      <div
-        className="eight wide column"
-        style={{
-          textAlign: "center"
-        }}
-      >
-        <h4
-          style={{
-            borderBottom: "1px solid"
-          }}
-        >
+      <div className="eight wide column pokemon-skills-container">
+        <h4 className="pokemon-skills-header">
           {stat.stat.name.toUpperCase()}
         </h4>
         <strong>Base stat:</strong>

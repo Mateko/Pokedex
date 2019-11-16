@@ -12,8 +12,7 @@
 .fetching-error {
   margin-top: 40vh;
 }
-
-.fetching-error-button {
+.ui.fetching-error-button.button {
   background-color: #ffcb05;
   color: #2a75bb;
   font-size: 20px;
@@ -36,4 +35,17 @@
 
 .pokemon-details-grid-div {
   max-width: 80vh;
+}
+
+.ui.error-message.message {
+  text-align: center;
+  font-weight: bold;
+}
+
+.pokemon-skills-header {
+  border-bottom: 1px solid;
+}
+
+.pokemon-skills-container {
+  text-align: center;
 }

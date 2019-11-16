@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-
+import "./PickingPokemon.css";
 class PickingPokemon extends React.Component {
   state = { pokemon: "", toPokeDetails: false };
 
@@ -27,42 +27,28 @@ class PickingPokemon extends React.Component {
       return <Redirect to="/pokemon_details" />;
     }
     return (
-      <div className="column" style={{ maxWidth: "50vh", marginTop: "20vh" }}>
+      <div className="column pokemon-column-container">
         <div className="ui image aligned center aligned grid">
           <img
             src="http://pluspng.com/img-png/pokemon-logo-png-pokemon-logo-png-2000.png"
             alt="Pokemon Logo PNG"
             className="pokemon-logo"
-            style={{ marginLeft: "10px" }}
           />
         </div>
         <form className="ui large form">
           <h2>Catch by name</h2>
-          <div className="field pokemon-name-input">
-            <input
-              type="text"
-              name="text"
-              placeholder="Pokename!"
-              style={{
-                borderColor: "#2A75BB",
-                fontWeight: "bold",
-                fontSize: "20px",
-                color: "#2A75BB",
-                marginTop: "10px",
-                borderWidth: "3px",
-                textAlign: "center"
-              }}
-              onChange={this.onInputChange.bind(this)}
-              value={this.state.pokemon}
-            />
+          <div className="field">
+            <div class="ui input">
+              <input
+                className="pokemon-name-input"
+                type="text"
+                placeholder="Pokename!"
+                onChange={this.onInputChange.bind(this)}
+                value={this.state.pokemon}
+              />
+            </div>
             <button
-              className="ui fluid large submit button blue pokemon-button-submit"
-              style={{
-                backgroundColor: "#FFCB05",
-                marginTop: "5px",
-                color: "#2A75BB",
-                fontSize: "20px"
-              }}
+              className="ui fluid large submit pokemon-button-submit button"
               onClick={this.onInputSubmit.bind(this)}
               disabled={disableButton | whiteSpaces}
             >
