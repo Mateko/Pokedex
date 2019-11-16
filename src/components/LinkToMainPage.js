@@ -4,7 +4,7 @@ import React from "react";
 const LinkToMainPage = ({ message }) => {
   return (
     <Link
-      className="ui fluid large submit fetching-error-button button"
+      className="ui fluid large submit link-to-main-page button"
       role="button"
       to="/"
     >

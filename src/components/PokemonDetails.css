@@ -12,7 +12,7 @@
 .fetching-error {
   margin-top: 40vh;
 }
-.ui.fetching-error-button.button {
+.ui.link-to-main-page.button {
   background-color: #ffcb05;
   color: #2a75bb;
   font-size: 20px;

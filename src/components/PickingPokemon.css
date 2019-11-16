@@ -1,6 +1,6 @@
 .ui.pokemon-button-submit.button {
   background-color: #ffcb05;
-  margin-top: 5px;
+  margin-top: 10px;
   color: #2a75bb;
   font-size: 20px;
 }
@@ -22,4 +22,11 @@
 .pokemon-column-container {
   max-width: 50vh;
   margin-top: 20vh;
+}
+
+.ui.pokemon-button-random-picks.button {
+  background-color: #ffcb05;
+  margin-top: 10px;
+  color: #2a75bb;
+  font-size: 20px;
 }

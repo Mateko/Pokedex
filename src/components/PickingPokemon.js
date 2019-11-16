@@ -1,8 +1,9 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import "./PickingPokemon.css";
+
 class PickingPokemon extends React.Component {
-  state = { pokemon: "", toPokeDetails: false };
+  state = { pokemon: "", toPokeDetails: false, randomPokemons: false };
 
   onInputChange(e) {
     e.preventDefault();
@@ -19,6 +20,14 @@ class PickingPokemon extends React.Component {
     });
   }
 
+  onButtonClick(e) {
+    e.preventDefault();
+    this.props.onRandomPokemons();
+    this.setState({
+      randomPokemons: true
+    });
+  }
+
   render() {
     const disableButton = this.state.pokemon.length === 0;
     const whiteSpaces = this.state.pokemon.split(" ").length > 1;
@@ -26,6 +35,11 @@ class PickingPokemon extends React.Component {
     if (this.state.toPokeDetails === true) {
       return <Redirect to="/pokemon_details" />;
     }
+
+    if (this.state.randomPokemons === true) {
+      return <Redirect to="/random_pokemons" />;
+    }
+
     return (
       <div className="column pokemon-column-container">
         <div className="ui image aligned center aligned grid">
@@ -38,7 +52,7 @@ class PickingPokemon extends React.Component {
         <form className="ui large form">
           <h2>Catch by name</h2>
           <div className="field">
-            <div class="ui input">
+            <div className="ui input">
               <input
                 className="pokemon-name-input"
                 type="text"
@@ -54,11 +68,19 @@ class PickingPokemon extends React.Component {
             >
               Search
             </button>
+
             {whiteSpaces ? (
               <div className="ui red message">
                 Pokemon name can't have white spaces!
               </div>
             ) : null}
+
+            <button
+              className="ui fluid large submit pokemon-button-random-picks button"
+              onClick={this.onButtonClick.bind(this)}
+            >
+              Discover random Pokemons!
+            </button>
           </div>
         </form>
       </div>

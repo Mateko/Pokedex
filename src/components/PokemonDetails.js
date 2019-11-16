@@ -3,7 +3,8 @@ import PokemonSkills from "./PokemonSkills";
 import Loader from "./Loader";
 import PokemonAbilities from "./PokemonAbilities";
 import LinkToMainPage from "./LinkToMainPage";
-import pokemonTypeColors from "./PokemonTypeColors";
+import pokemonTypeColors from "./helpers/PokemonTypeColors";
+import pokemonType from "./helpers/PokemonType";
 import "./PokemonDetails.css";
 
 const PokemonDetails = ({ selectedPokemon, fetchingError }) => {
@@ -11,18 +12,9 @@ const PokemonDetails = ({ selectedPokemon, fetchingError }) => {
     const stats = selectedPokemon.stats;
     const abilities = selectedPokemon.abilities;
 
-    function pokemonType() {
-      return selectedPokemon.types.map(({ type }) => {
-        return (
-          <p
-            className="pokemon-type"
-            style={{ color: `${pokemonTypeColors[type.name]}` }}
-          >
-            {type.name}
-          </p>
-        );
-      });
-    }
+    const colorOfPokemonName = `${
+      pokemonTypeColors[selectedPokemon.types[0].type.name]
+    }`;
 
     return (
       <div className="ui grid aligned center pokemon-details-grid-div">
@@ -36,14 +28,14 @@ const PokemonDetails = ({ selectedPokemon, fetchingError }) => {
         <div className="nine wide column">
           <h1
             style={{
-              color: `${pokemonTypeColors[selectedPokemon.types[0].type.name]}`
+              color: colorOfPokemonName
             }}
             className="pokemon-name"
           >
             {selectedPokemon.name}
           </h1>
           <h4 className="pokemon-type-header">Type:</h4>
-          {pokemonType()}
+          {pokemonType(selectedPokemon)}
         </div>
         <h4 className="ui horizontal divider header">
           <i className="bolt icon"></i>

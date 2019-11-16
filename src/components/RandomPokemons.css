@@ -1,0 +1,13 @@
+.random-pokemons-grid-component {
+  max-width: 60vh;
+}
+
+.random-pokemons-grid-component .random-pokemon-header {
+  text-align: center;
+  margin-top: 5vh;
+  color: #2a75bb;
+}
+
+.random-pokemon-name {
+  text-align: center;
+}
