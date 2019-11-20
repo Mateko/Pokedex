@@ -66,7 +66,10 @@ class App extends React.Component {
               path="/random_pokemons"
               exact
               component={() => (
-                <RandomPokemons pokemonsArray={this.state.pokemonsArray} />
+                <RandomPokemons
+                  pokemonsArray={this.state.pokemonsArray}
+                  onGettingPokemonName={this.onGettingPokemonName}
+                />
               )}
             />
           </div>
