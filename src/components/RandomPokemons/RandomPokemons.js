@@ -1,9 +1,9 @@
 import React from "react";
-import LinkToMainPage from "./LinkToMainPage";
-import Loader from "./Loader";
+import LinkToMainPage from "../LinkToMainPage";
+import Loader from "../Loader";
 import "./RandomPokemons.css";
-import pokemonTypeColors from "./helpers/PokemonTypeColors";
-import pokemonType from "./helpers/PokemonType";
+import pokemonTypeColors from "../../helpers/pokemonTypeColor";
+import pokemonType from "../../helpers/pokemonType";
 import { Redirect } from "react-router-dom";
 
 class RandomPokemons extends React.Component {
@@ -12,13 +12,13 @@ class RandomPokemons extends React.Component {
   onInputSubmit = e => {
     e.preventDefault();
     const pokemonName = e.target.getAttribute("name");
-    this.props.onGettingPokemonName(pokemonName);
+    this.props.getPokemonDetails(pokemonName);
     this.setState({
       toPokeDetails: true
     });
   };
 
-  showingRandomPokemons = () => {
+  displayPokemons = () => {
     return this.props.pokemonsArray.map(pokemon => {
       const colorOfPokemonName = `${
         pokemonTypeColors[pokemon.types[0].type.name]
@@ -31,7 +31,7 @@ class RandomPokemons extends React.Component {
         >
           <div className="ui card">
             <div className="image">
-              <img src={pokemon.sprites.front_default} />
+              <img src={pokemon.sprites.front_default} alt="Pokemon" />
             </div>
             <div className="content">
               <p
@@ -48,7 +48,7 @@ class RandomPokemons extends React.Component {
                 onClick={this.onInputSubmit}
                 name={pokemon.name}
               >
-                Look for details!
+                Details
               </button>
             </div>
           </div>
@@ -67,7 +67,7 @@ class RandomPokemons extends React.Component {
           <h1 className="sixteen wide column random-pokemon-header">
             Catch them all!
           </h1>
-          {this.showingRandomPokemons()}
+          {this.displayPokemons()}
           <div className="sixteen wide column">
             <LinkToMainPage message={"Back to main page"} />
           </div>

@@ -1,36 +1,36 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import "./PickingPokemon.css";
+import "./MainForm.css";
 
-class PickingPokemon extends React.Component {
+class MainForm extends React.Component {
   state = { pokemon: "", toPokeDetails: false, randomPokemons: false };
 
-  onInputChange(e) {
+  handleInput(e) {
     e.preventDefault();
     this.setState({
       pokemon: e.target.value
     });
   }
 
-  onInputSubmit(e) {
+  handleFormSubmit(e) {
     e.preventDefault();
-    this.props.onGettingPokemonName(this.state.pokemon);
+    this.props.getPokemonDetails(this.state.pokemon);
     this.setState({
       toPokeDetails: true
     });
   }
 
-  onButtonClick(e) {
+  handleButtonClick(e) {
     e.preventDefault();
-    this.props.onRandomPokemons();
+    this.props.getRandomPokemons();
     this.setState({
       randomPokemons: true
     });
   }
 
   render() {
-    const disableButton = this.state.pokemon.length === 0;
-    const whiteSpaces = this.state.pokemon.split(" ").length > 1;
+    const clearInput = this.state.pokemon.length === 0;
+    const whiteSpaceInInput = this.state.pokemon.split(" ").length > 1;
 
     if (this.state.toPokeDetails === true) {
       return <Redirect to="/pokemon_details" />;
@@ -57,19 +57,19 @@ class PickingPokemon extends React.Component {
                 className="pokemon-name-input"
                 type="text"
                 placeholder="Pokename!"
-                onChange={this.onInputChange.bind(this)}
+                onChange={this.handleInput.bind(this)}
                 value={this.state.pokemon}
               />
             </div>
             <button
               className="ui fluid large submit pokemon-button-submit button"
-              onClick={this.onInputSubmit.bind(this)}
-              disabled={disableButton | whiteSpaces}
+              onClick={this.handleFormSubmit.bind(this)}
+              disabled={clearInput | whiteSpaceInInput}
             >
               Search
             </button>
 
-            {whiteSpaces ? (
+            {whiteSpaceInInput ? (
               <div className="ui red message">
                 Pokemon name can't have white spaces!
               </div>
@@ -77,7 +77,7 @@ class PickingPokemon extends React.Component {
 
             <button
               className="ui fluid large submit pokemon-button-random-picks button"
-              onClick={this.onButtonClick.bind(this)}
+              onClick={this.handleButtonClick.bind(this)}
             >
               Discover random Pokemons!
             </button>
@@ -88,4 +88,4 @@ class PickingPokemon extends React.Component {
   }
 }
 
-export default PickingPokemon;
+export default MainForm;

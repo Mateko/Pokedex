@@ -1,9 +1,8 @@
-import pokemonTypeColors from "./PokemonTypeColors";
+import pokemonTypeColors from "./pokemonTypeColor";
 import React from "react";
 
 export default function pokemonType(selectedPokemon) {
   return selectedPokemon.types.map(({ type }) => {
-    console.log(type);
     return (
       <p
         key={type.url}

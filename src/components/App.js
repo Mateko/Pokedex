@@ -1,19 +1,16 @@
 import React from "react";
-import PickingPokemon from "./PickingPokemon";
-import PokemonDetails from "./PokemonDetails";
+import MainForm from "./MainForm/MainForm";
+import PokemonDetails from "./PokemonDetails/PokemonDetails";
 import { BrowserRouter, Route } from "react-router-dom";
-import RandomPokemons from "./RandomPokemons";
-const Pokedex = require("pokeapi-js-wrapper");
-const P = new Pokedex.Pokedex();
+import RandomPokemons from "./RandomPokemons/RandomPokemons";
+import { fetchPokemonByName, fetchRandomPokemons } from "../api/pokeApi";
 
 class App extends React.Component {
   state = { selectedPokemon: null, fetchingError: false, pokemonsArray: null };
 
-  onGettingPokemonName = async selectedPokemon => {
-    const loweredSelectedPokemon = selectedPokemon.toLowerCase();
-
+  getPokemonDetails = async selectedPokemon => {
     try {
-      const pokemon = await P.getPokemonByName(loweredSelectedPokemon);
+      const pokemon = await fetchPokemonByName(selectedPokemon);
       this.setState({
         selectedPokemon: pokemon
       });
@@ -24,31 +21,25 @@ class App extends React.Component {
     }
   };
 
-  onRandomPokemons = () => {
-    const initialUrlArray = new Array(20).fill("/api/v2/pokemon/");
-    const randomPokemonsArray = initialUrlArray.map(
-      url => url + (Math.floor(Math.random() * 807) + 1)
-    );
-
-    P.resource(randomPokemonsArray).then(response => {
-      this.setState({
-        pokemonsArray: response
-      });
+  getRandomPokemons = async () => {
+    const pokemonsArray = await fetchRandomPokemons();
+    this.setState({
+      pokemonsArray
     });
   };
 
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <div className="ui middle aligned center aligned grid">
             <Route
               path="/"
               exact
               component={() => (
-                <PickingPokemon
-                  onGettingPokemonName={this.onGettingPokemonName}
-                  onRandomPokemons={this.onRandomPokemons}
+                <MainForm
+                  getPokemonDetails={this.getPokemonDetails}
+                  getRandomPokemons={this.getRandomPokemons}
                 />
               )}
             />
@@ -68,7 +59,7 @@ class App extends React.Component {
               component={() => (
                 <RandomPokemons
                   pokemonsArray={this.state.pokemonsArray}
-                  onGettingPokemonName={this.onGettingPokemonName}
+                  getPokemonDetails={this.getPokemonDetails}
                 />
               )}
             />

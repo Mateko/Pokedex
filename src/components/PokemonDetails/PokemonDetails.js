@@ -1,10 +1,10 @@
 import React from "react";
-import PokemonSkills from "./PokemonSkills";
-import Loader from "./Loader";
-import PokemonAbilities from "./PokemonAbilities";
-import LinkToMainPage from "./LinkToMainPage";
-import pokemonTypeColors from "./helpers/PokemonTypeColors";
-import pokemonType from "./helpers/PokemonType";
+import PokemonSkills from "../PokemonSkills";
+import Loader from "../Loader";
+import PokemonAbilities from "../PokemonAbilities";
+import LinkToMainPage from "../LinkToMainPage";
+import pokemonTypeColors from "../../helpers/pokemonTypeColor";
+import pokemonType from "../../helpers/pokemonType";
 import "./PokemonDetails.css";
 
 const PokemonDetails = ({ selectedPokemon, fetchingError }) => {
@@ -21,7 +21,7 @@ const PokemonDetails = ({ selectedPokemon, fetchingError }) => {
         <div className="seven wide column">
           <img
             src={selectedPokemon.sprites.front_default}
-            alt="pokemon image"
+            alt="Pokemon"
             className="pokemon-image"
           />
         </div>
